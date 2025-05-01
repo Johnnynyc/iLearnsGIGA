@@ -62,6 +62,9 @@ String wav = ".wav";
 int gameState;
 bool played = true;
 
+void playAudioFile();
+void configFile(int toOutput);
+
 
 void setup() {
   Serial.begin(115200);
