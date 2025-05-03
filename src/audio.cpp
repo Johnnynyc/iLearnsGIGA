@@ -5,9 +5,9 @@
  * It opens and streams a WAV file corresponding to a given letter or number,
  * based on the game state:
  * 
- *   GameState 1: Number Pointing – plays a file from USBNumberPoint.
- *   GameState 2: Letter Pointing – plays a file from USBLetterPoint.
- *   GameState 3: Letter Sounding  – plays a file from USBLetterSound.
+ *   GameState 1: Letter Pointing – plays a file from index (0 - 25).
+ *   GameState 2: Letter Sounding – plays a file from index (26 - 51).
+ *   GameState 3: Number Pointing  – plays a file from index (52 - 71).
  * 
  **************************************************************************/
 
@@ -144,9 +144,6 @@ void playAudioFile(){
 }
 
 
- // Opens and configures the audio file for the given input.
- // For gameState 1 (Number Pointing), tempInput should be a digit character (or you may extend to a String if needed).
- // For gameState 2 (Letter Pointing) or 3 (Letter Sounding), tempInput is the letter.
 void configFile(int toOutput) {
   /* 16-bit PCM Mono 16kHz realigned noise reduction */
   String result = base + Sounds[toOutput] + wav;
@@ -154,32 +151,7 @@ void configFile(int toOutput) {
   Serial.println("File name: " + Sounds[toOutput]);
   Serial.println("result: " + result);
 
-  // Serial.println("tempLetter: " + tempLetter);
-  // Serial.println(gameState);
-  // Serial.println("toOutput: " + toOutput);
-
   file = fopen(result.c_str(), "rb");
-  // switch(gameState){
-  // case '4':  //Number Pointing, a-
-  //   result = USBNumberPoint + tempLetter + wav;
-  //   file = fopen(result.c_str(), "rb");
-  //   break;
-
-  // case '2':  //Letter Pointing
-  //   //tempLetter++;
-  //   result = USBLetterPoint + tempLetter + wav;
-  //   file = fopen(result.c_str(), "rb");
-  //   break;
-
-  // case '5':  //Letter Sounding
-  //   result = USBLetterSound + tempLetter + wav;
-  //   file = fopen(result.c_str(), "rb");
-  //   break;
-
-  // default:
-    
-  //   break;
-  // }
 
   currentAudio = result;
 
